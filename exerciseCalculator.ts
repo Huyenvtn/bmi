@@ -5,10 +5,10 @@ interface ExerciseArg {
 
 const checkArguments = (args: Array<string>): ExerciseArg => {
   if (args.length < 4) throw new Error('Not enough arguments');
-  let arr = args.slice(2); 
+  const arr = args.slice(2); 
   for (let i=0; i<arr.length; i++) {
     if(isNaN(Number(arr[i]))){
-      throw new Error('Provided values were not numbers!')
+      throw new Error('Provided values were not numbers!');
     }
   }
   const arrOfNum = arr.map(str => {
@@ -17,8 +17,8 @@ const checkArguments = (args: Array<string>): ExerciseArg => {
   return {
     hours: arrOfNum.slice(1),
     target: arrOfNum[0]
-  }
-}
+  };
+};
 const calculateExercises = (hours: Array<number>, target: number) => {
   const hoursTrain = hours.filter(hour => hour > 0);
   let totalHours = 0;
@@ -34,18 +34,18 @@ const calculateExercises = (hours: Array<number>, target: number) => {
     ratingDescription: average >= target ? 'very good' : 'not too bad but could be better',
     target: target,
     average: hours.length > 0 ? totalHours/hours.length : 0
-  }
-}
+  };
+};
 try {
-  const { hours, target } = checkArguments(process.argv)
-  const rs = calculateExercises(hours, target)
-  console.log(rs)
+  const { hours, target } = checkArguments(process.argv);
+  const rs = calculateExercises(hours, target);
+  console.log(rs);
 } catch (error: unknown) {
-  let errorMessage = 'Something bad happened.'
+  let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {
     errorMessage += error.message;
   }
-  console.log(errorMessage)
+  console.log(errorMessage);
 }
 // const time = [3, 0, 2, 4.5, 0, 3, 1];
 // calculateExercises(time, 1)

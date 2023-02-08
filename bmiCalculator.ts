@@ -3,12 +3,12 @@ interface BMIArg {
   weight: number
 }
 
-const checkBMIArguments = (args: Array<string>): BMIArg => {
-  if (args.length < 4) throw new Error('Not enough arguments');
-  if(!isNaN(Number(args[2])) && !isNaN(Number(args[3]))){
+export const checkBMIArguments = (arg1: string, agr2: string): BMIArg => {
+  if (!arg1 || !agr2) throw new Error('Not enough arguments');
+  if(!isNaN(Number(arg1)) && !isNaN(Number(agr2))){
     return {
-      height: Number(args[2]),
-      weight: Number(args[3])
+      height: Number(arg1),
+      weight: Number(agr2)
     };
   } else throw new Error('Provided values were not numbers!');
 };
@@ -40,7 +40,7 @@ const calculateBmi = (height: number, weight: number): string => {
 };
 
 try {
-  const { height, weight } = checkBMIArguments(process.argv);
+  const { height, weight } = checkBMIArguments(process.argv[2], process.argv[3]);
   const rs = calculateBmi(height, weight);
   console.log(rs);
 } catch (error: unknown) {
